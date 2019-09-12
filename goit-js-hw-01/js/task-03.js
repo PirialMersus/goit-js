@@ -1,23 +1,31 @@
-"use strict";
-// Напиши скрипт имитирующий авторизацию администратора в панели управления.
+const CANCELED_BY_USER = 'Отменено пользователем!';
+const WELLCOME = 'Добро пожаловать!';
+const ACCESS_DENIED = 'Доступ запрещен, неверный пароль!';
 
-// Есть переменная message в которую будет записано сообщение о результате.
-//При загрузке страницы у посетителя запрашивается пароль через prompt:
-
-// Если нажали Cancel, записать в message строку 'Отменено пользователем!'
-// В протовном случае, если введен пароль который совпадает со значением константы ADMIN_PASSWORD,
-// записать в message строку 'Добро пожаловать!'
-// В противном случае, то есть если ни одно из предыдущих условий не выполнилось,
-// записать в message строку 'Доступ запрещен, неверный пароль!'
-// После всех проверок вывести в alert значение переменной message.
-const ADMIN_PASSWORD = "jqueryismyjam";
+const ADMIN_PASSWORD = 'jqueryismyjam';
+const userSaid = prompt('Enter the password');
 let message;
-let possiblePassword;
 
-prompt("Введите пароль", possiblePassword);
+if (userSaid === null) {
+  message = CANCELED_BY_USER;
+  console.assert(
+    userSaid === null && message === CANCELED_BY_USER,
+    'Error: при обработке null',
+  );
+} else if (userSaid === ADMIN_PASSWORD) {
+  message = WELLCOME;
+  console.assert(
+    userSaid === ADMIN_PASSWORD && message === WELLCOME,
+    'Error: при обработке правильного пароля',
+  );
+} else {
+  message = ACCESS_DENIED;
+  console.assert(
+    userSaid !== ADMIN_PASSWORD
+      && userSaid !== null
+      && message === ACCESS_DENIED,
+    'Error: при обработке неправильного пароля',
+  );
+}
 
-if (possiblePassword === false) {
-  console.log("Отменено пользователем!");
-} else if (possiblePassword === ADMIN_PASSWORD) {
-  console.log("Добро пожаловать!");
-} else "Доступ запрещен, неверный пароль!";
+alert(message);

@@ -1,3 +1,3 @@
-let a = "abc";
+const a = 'abc';
 const FIVE = 5;
 console.log(a);
